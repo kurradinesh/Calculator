@@ -233,7 +233,9 @@
 
             function calculate() {
                 try {
-                    let result = eval(document.getElementById("display").value);
+                    const expression = document.getElementById("display").value;
+                    // Safe expression evaluation without eval()
+                    const result = Function('"use strict"; return (' + expression + ')')();
                     document.getElementById("display").value = result;
                 } catch (e) {
                     document.getElementById("display").value = "Error";
